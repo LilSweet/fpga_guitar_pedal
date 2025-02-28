@@ -26,9 +26,8 @@ void runTclScript(const std::string& script) {
 int main() {
     // List of TCL scripts to execute
     std::vector<std::string> scripts = {
-        "script1.tcl",
-        "script2.tcl",
-        "script3.tcl"
+        "create_project.tcl",
+        "add_files.tcl"
     };
 
     std::ofstream logFile(LOG_FILE, std::ios::out);
