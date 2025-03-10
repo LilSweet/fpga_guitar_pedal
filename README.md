@@ -9,3 +9,6 @@ In next update, a csv file will be created to specify pin mapping, and IO constr
 
 2/27/2025
 In next update a new tcl file will be created to compile the project, and export a programming file
+
+3/10/2025
+In next update, the dsp work begins...

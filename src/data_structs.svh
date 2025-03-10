@@ -3,6 +3,7 @@
 `define DATA_STRUCTS_SVH
 
 typedef struct packed {
+    logic        bclk;
     logic        raw_data;
     logic [31:0] sample_data;   // Raw 24-bit data from the ADC
 } adc_data_t;
@@ -14,8 +15,9 @@ typedef struct packed {
 } processed_data_t;
 
 typedef struct packed {
+    logic        bclk;
     logic [23:0] dac_data;   // 24-bit output data for the DAC
-    logic overflow_flag;     // Overflow status
+    logic        overflow_flag;     // Overflow status
 } dac_data_t;
 
 typedef struct packed {

@@ -1,5 +1,5 @@
 `timescale 1 ns / 1 ns
-//`include "data_structs.svh"
+`include "data_structs.svh"
 
 module top(
     input        INCLK,
@@ -10,33 +10,32 @@ module top(
     output [1:0] LED
 );
 
-//adc_data_t adc_data;      //CS4272 outputs 2s compliment, so no conversion needs to happen for fixed point
-//dac_data_t dac_data;      //data will need dithering before being output to DAC
-//processed_data_t eq_data;
+adc_data_t adc_data;      //CS4272 outputs 2s compliment, so no conversion needs to happen for fixed point
+dac_data_t dac_data;      //data will need dithering before being output to DAC
+processed_data_t eq_data;
 
-//logic sys_clk;  //use to drive logic needed for system
-//logic bclk;     //provides bit clock for ADC
-//logic alg_clk;  //Used for calculations
-//logic sync;     //provides sync clock (LR Clock)
+logic sys_clk;  //use to drive logic needed for system
+logic bclk;     //provides bit clock for ADC, [bclk = (64 * lr_clk)] for best performance as per the datasheet for CS4272
+logic clk_24M576;
+logic lr_clk;
 
-//logic codec_mclk;
-//logic lr_clk;
+logic resetn;
 
-//logic resetn;
+logic send_next_sample;
 
-//logic send_next_sample;
+logic mmcm_locked;
 
-//wire pll_locked;
+sys_mmcm clk_gen(
+  .reset        (~DEV_RST_N),
+  .clk_in1      (INCLK),
+  .clk_out1     (clk_24M576), //24M576
+  .clk_out2     (sys_clk), //192M00
+  .clk_out3     (bclk), //6M144
+  .locked       (mmcm_locked)
+);
 
-//pll_wrapper sys_pll (
-//  .clk_in           (INCLK),
-//  .resetn           (DEV_RST_N),
-//  .pll_locked       (pll_locked),
-//  .c0               (sys_clk),
-//  .c1               (alg_clk),
-//  .c2               (bclk),
-//  .c3               (sync)
-//);
+assign adc_data.bclk = bclk;
+assign dac_data.bclk = bclk;
 
 //reset_sync sys_rst (
 //  .clk              (sys_clk),

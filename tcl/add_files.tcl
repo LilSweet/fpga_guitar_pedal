@@ -1,3 +1,5 @@
+set_msg_config -id "Vivado Tcl-4" -suppress
+
 set project_name "fpga_guitar_pedal"
 set project_dir "../"
 set source_dir "src/"
@@ -54,3 +56,5 @@ puts "Setting top level file..."
 
 set_property top top [current_fileset]
 update_compile_order -fileset sources_1
+
+puts "Top level file set, moving to compilation..."

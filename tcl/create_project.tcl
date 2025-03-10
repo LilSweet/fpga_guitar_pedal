@@ -1,3 +1,5 @@
+set_msg_config -id "Vivado Tcl-4" -suppress
+
 set project_name "fpga_guitar_pedal"
 set project_dir "../"
 set project_file "${project_name}.xpr"
